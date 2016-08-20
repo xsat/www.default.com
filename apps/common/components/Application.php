@@ -15,6 +15,8 @@ class Application extends \Phalcon\Mvc\Application
         $loader = new \Phalcon\Loader();
         $loader->registerNamespaces([
             'Common' => $this->dir  . '/../components/',
+            'Frontend' => $this->dir  . '/../../frontend/components/',
+            'Backend' => $this->dir  . '/../../backend/components/',
             'Common\Controllers' => $this->dir  . '/../controllers/',
             'Common\Models' => $this->dir  . '/../models/',
             'Common\Plugins' => $this->dir  . '/../plugins/',
@@ -43,15 +45,16 @@ class Application extends \Phalcon\Mvc\Application
         $this->setDI($di);
 
         $this->registerModules([
-            'frontend' => [
+            'Frontend' => [
                 'className' => 'Frontend\Module',
                 'path' => '../apps/frontend/components/Module.php'
             ],
-            'backend' => [
+            'Backend' => [
                 'className' => 'Backend\Module',
                 'path' => '../apps/backend/components/Module.php'
             ],
         ]);
+        $this->setDefaultModule('Frontend');
     }
 
     public function getCompressedContent()
