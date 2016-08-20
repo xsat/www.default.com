@@ -1,0 +1,10 @@
+.idea/*
+public/content/*
+apps/backend/cache/models/*
+apps/backend/cache/views/*
+apps/common/cache/models/*
+apps/common/cache/views/*
+apps/frontend/cache/models/*
+apps/frontend/cache/views/*
+!.gitkeep
+todo.txt
