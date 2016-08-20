@@ -7,4 +7,3 @@ apps/common/cache/views/*
 apps/frontend/cache/models/*
 apps/frontend/cache/views/*
 !.gitkeep
-todo.txt
