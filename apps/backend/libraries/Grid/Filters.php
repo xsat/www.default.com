@@ -1,6 +1,8 @@
 <?php namespace Backend\Libraries\Grid;
 
-class Filters extends \Phalcon\Mvc\User\Component
+use \Phalcon\Mvc\User\Component;
+
+class Filters extends Component
 {
     private $filters = [];
 

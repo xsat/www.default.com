@@ -1,6 +1,8 @@
 <?php namespace Common\Controllers;
 
-class ParentController extends \Phalcon\Mvc\Controller
+use \Phalcon\Mvc\Controller as PhalconController;
+
+class ParentController extends PhalconController
 {
 
 }

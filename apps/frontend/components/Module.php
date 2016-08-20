@@ -1,6 +1,8 @@
 <?php namespace Frontend;
 
-class Module extends \Common\Module
+use \Common\Module as CommonModule;
+
+class Module extends CommonModule
 {
 	protected function initModule()
 	{

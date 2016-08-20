@@ -1,6 +1,8 @@
 <?php namespace Common;
 
-class Config extends \Phalcon\Config
+use \Phalcon\Config as PhalconConfig;
+
+class Config extends PhalconConfig
 {
 	public function __construct()
 	{

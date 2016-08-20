@@ -1,6 +1,15 @@
 <?php namespace Common;
 
-class Application extends \Phalcon\Mvc\Application
+use \Phalcon\Mvc\Application as PhalconApplication,
+    \Phalcon\Loader,
+    \Phalcon\DI\FactoryDefault,
+    \Phalcon\Mvc\Url,
+    \Phalcon\Db\Adapter\Pdo\Mysql,
+    \Phalcon\Session\Adapter\Files as SessionFiles,
+    \Phalcon\Mvc\Model\Metadata\Files as MetadataFiles;
+
+
+class Application extends PhalconApplication
 {
     private $dir;
 
@@ -12,7 +21,7 @@ class Application extends \Phalcon\Mvc\Application
 
     private function setServices()
     {
-        $loader = new \Phalcon\Loader();
+        $loader = new Loader();
         $loader->registerNamespaces([
             'Common' => $this->dir  . '/../components/',
             'Frontend' => $this->dir  . '/../../frontend/components/',
@@ -23,22 +32,23 @@ class Application extends \Phalcon\Mvc\Application
         ]);
         $loader->register();
 
-        $config = new \Common\Config();
-        $di = new \Phalcon\DI\FactoryDefault();
-        $di->set('router', new \Common\Router());
-        $di->set('url', new \Phalcon\Mvc\Url());
-        $di->set('db', new \Phalcon\Db\Adapter\Pdo\Mysql([
+        $config = new Config();
+        $di = new FactoryDefault();
+        $di->set('router', new Router());
+        $di->set('url', new Url());
+
+        $di->set('db', new Mysql([
             "host" => $config->database->host,
             "username" => $config->database->username,
             "password" => $config->database->password,
             "dbname" => $config->database->name
         ]));
         $di->set('session', function() {
-            $session = new \Phalcon\Session\Adapter\Files();
+            $session = new SessionFiles();
             $session->start();
             return $session;
         });
-        $di->set('modelsMetadata', new \Phalcon\Mvc\Model\Metadata\Files([
+        $di->set('modelsMetadata', new MetadataFiles([
             'metaDataDir' => $this->dir . '/../cache/models/'
         ]));
 

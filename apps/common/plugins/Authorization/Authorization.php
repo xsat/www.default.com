@@ -1,8 +1,12 @@
 <?php namespace Common\Plugins\Authorization;
 
-class Authorization extends \Phalcon\Mvc\User\Plugin
+use \Phalcon\Mvc\User\Plugin,
+    \Phalcon\Events\Event,
+    \Phalcon\Mvc\Dispatcher;
+
+class Authorization extends Plugin
 {
-    public function beforeExecuteRoute(\Phalcon\Events\Event $event, \Phalcon\Mvc\Dispatcher $dispatcher)
+    public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher)
     {
         //$acl = $this->getAcl();
     }

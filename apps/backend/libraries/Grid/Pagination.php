@@ -2,9 +2,10 @@
 
 use \Backend\Libraries\Grid\Pagination\Item,
     \Backend\Libraries\Grid\Pagination\Prev,
-    \Backend\Libraries\Grid\Pagination\Next;
+    \Backend\Libraries\Grid\Pagination\Next,
+    \Phalcon\Paginator\Adapter\Model as PhalconPaginator;
 
-class Pagination extends \Phalcon\Paginator\Adapter\Model
+class Pagination extends PhalconPaginator
 {
     private $page;
     private $pages;

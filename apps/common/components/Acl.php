@@ -1,6 +1,8 @@
 <?php namespace Common;
 
-class Alc extends \Phalcon\Acl\Adapter\Memory
+use \Phalcon\Acl\Adapter\Memory;
+
+class Alc extends Memory
 {
     public function __construct()
     {

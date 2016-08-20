@@ -1,6 +1,8 @@
 <?php namespace Common;
 
-class Router extends \Phalcon\Mvc\Router
+use \Phalcon\Mvc\Router as PhalconRouter;
+
+class Router extends PhalconRouter
 {
     public function __construct()
     {

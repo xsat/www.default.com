@@ -1,6 +1,8 @@
 <?php namespace Frontend;
 
-class RouterGroup extends \Phalcon\Mvc\Router\Group
+use \Phalcon\Mvc\Router\Group;
+
+class RouterGroup extends Group
 {
     public function initialize()
     {

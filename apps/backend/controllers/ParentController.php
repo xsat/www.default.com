@@ -1,6 +1,8 @@
 <?php namespace Backend\Controllers;
 
-class ParentController extends \Common\Controllers\ParentController
+use \Common\Controllers\ParentController as CommonParentController;
+
+class ParentController extends CommonParentController
 {
 
 }

@@ -1,6 +1,8 @@
 <?php namespace Backend\Models;
 
-class Model extends \Common\Models\Model
+use \Common\Models\Model as CommonModel;
+
+class Model extends CommonModel
 {
     public $id;
 }

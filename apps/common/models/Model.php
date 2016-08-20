@@ -1,6 +1,8 @@
 <?php namespace Common\Models;
 
-class Model extends \Phalcon\Mvc\Model
+use \Phalcon\Mvc\Model as PhalconModel;
+
+class Model extends PhalconModel
 {
     public $id;
 }

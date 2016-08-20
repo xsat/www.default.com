@@ -1,6 +1,8 @@
 <?php namespace Backend\Libraries\Grid;
 
-class Grid extends \Phalcon\Mvc\User\Component
+use \Phalcon\Mvc\User\Component;
+
+class Grid extends Component
 {
     private $paginator;
     private $page;

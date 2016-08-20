@@ -1,6 +1,14 @@
 <?php namespace Common;
 
-use \Phalcon\Mvc\ModuleDefinitionInterface;
+use \Phalcon\Mvc\ModuleDefinitionInterface,
+    \Phalcon\DiInterface,
+    \Common\Plugins\Authorization\Authorization,
+    \Phalcon\Loader,
+    \Phalcon\Mvc\Dispatcher,
+    \Phalcon\Events\Manager as EventsManager,
+    \Phalcon\Mvc\View,
+    \Phalcon\Mvc\View\Engine\Volt,
+    \Phalcon\Mvc\Model\Metadata\Files as MetadataFiles;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -19,9 +27,9 @@ class Module implements ModuleDefinitionInterface
         $this->prefix = 'Common';
     }
 
-    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null)
+    public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
-        $loader = new \Phalcon\Loader();
+        $loader = new Loader();
         $loader->registerNamespaces([
             $this->prefix . '\Controllers' => $this->dir . '/../controllers/',
             $this->prefix . '\Models' => $this->dir . '/../models/',
@@ -32,7 +40,7 @@ class Module implements ModuleDefinitionInterface
         $loader->register();
     }
 
-    public function registerServices(\Phalcon\DiInterface $dependencyInjector)
+    public function registerServices(DiInterface $dependencyInjector)
     {
         $this->di = $dependencyInjector;
         $this->di->set('dispatcher',$this->setDispatcher());
@@ -42,17 +50,17 @@ class Module implements ModuleDefinitionInterface
 
     private function setDispatcher()
     {
-        $dispatcher = new \Phalcon\Mvc\Dispatcher();
+        $dispatcher = new Dispatcher();
         $dispatcher->setDefaultNamespace($this->prefix .  '\Controllers');
-        $eventsManager = new \Phalcon\Events\Manager();
-        $eventsManager->attach('dispatch:beforeExecuteRoute', new Plugins\Authorization\Authorization());
+        $eventsManager = new EventsManager();
+        $eventsManager->attach('dispatch:beforeExecuteRoute', new Authorization());
         $dispatcher->setEventsManager($eventsManager);
         return $dispatcher;
     }
 
     private function setView()
     {
-        $view = new \Phalcon\Mvc\View();
+        $view = new View();
         $view->setViewsDir($this->dir . '/../views/');
         $view->setLayoutsDir('layouts/');
         $view->setLayout('main');
@@ -63,9 +71,9 @@ class Module implements ModuleDefinitionInterface
         return $view;
     }
 
-    private function setVolt(\Phalcon\Mvc\View $view)
+    private function setVolt(View $view)
     {
-        $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $this->di);
+        $volt = new Volt($view, $this->di);
         $volt->setOptions([
             'compiledPath' => $this->dir . '/../cache/views/',
             'compiledSeparator' => '_',
@@ -75,7 +83,7 @@ class Module implements ModuleDefinitionInterface
 
     private function setModelsMetadata()
     {
-        return new \Phalcon\Mvc\Model\Metadata\Files([
+        return new MetadataFiles([
             'metaDataDir' => $this->dir . '/../cache/models/'
         ]);
     }

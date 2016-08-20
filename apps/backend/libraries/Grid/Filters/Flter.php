@@ -1,6 +1,8 @@
 <?php namespace Backend\Libraries\Grid\Filters;
 
-class Filter extends \Phalcon\Mvc\User\Component implements FilterInterface
+use \Phalcon\Mvc\User\Component;
+
+class Filter extends Component implements FilterInterface
 {
     const TYPE_INT = 'int';
     const TYPE_STRING = 'string';
