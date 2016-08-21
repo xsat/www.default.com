@@ -15,7 +15,7 @@
         <![endif]-->
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="row">

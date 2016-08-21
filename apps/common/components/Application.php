@@ -8,7 +8,6 @@ use \Phalcon\Mvc\Application as PhalconApplication,
     \Phalcon\Session\Adapter\Files as SessionFiles,
     \Phalcon\Mvc\Model\Metadata\Files as MetadataFiles;
 
-
 class Application extends PhalconApplication
 {
     private $dir;
@@ -55,16 +54,16 @@ class Application extends PhalconApplication
         $this->setDI($di);
 
         $this->registerModules([
-            'Frontend' => [
+            'frontend' => [
                 'className' => 'Frontend\Module',
                 'path' => '../apps/frontend/components/Module.php'
             ],
-            'Backend' => [
+            'backend' => [
                 'className' => 'Backend\Module',
                 'path' => '../apps/backend/components/Module.php'
             ],
         ]);
-        $this->setDefaultModule('Frontend');
+        $this->setDefaultModule('frontend');
     }
 
     public function getCompressedContent()

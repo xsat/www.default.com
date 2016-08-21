@@ -9,5 +9,11 @@ class Authorization extends Plugin
     public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher)
     {
         //$acl = $this->getAcl();
+
+        var_dump(
+            $dispatcher->getActionName(),
+            $dispatcher->getControllerName(),
+            $dispatcher->getModuleName()
+        );exit;
     }
 }

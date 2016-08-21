@@ -7,7 +7,7 @@ class RouterGroup extends Group
     public function initialize()
     {
         $this->setPaths([
-            'module'    => 'Backend',
+            'module'    => 'backend',
             'namespace' => 'Backend\Controllers',
         ]);
 

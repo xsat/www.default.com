@@ -10,7 +10,7 @@ use \Phalcon\Mvc\ModuleDefinitionInterface,
     \Phalcon\Mvc\View\Engine\Volt,
     \Phalcon\Mvc\Model\Metadata\Files as MetadataFiles;
 
-class Module implements ModuleDefinitionInterface
+abstract class Module implements ModuleDefinitionInterface
 {
     protected $dir;
     protected $prefix;
@@ -21,11 +21,7 @@ class Module implements ModuleDefinitionInterface
         $this->initModule();
     }
 
-    protected function initModule()
-    {
-        $this->dir = __DIR__;
-        $this->prefix = 'Common';
-    }
+    abstract protected function initModule();
 
     public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
@@ -43,7 +39,8 @@ class Module implements ModuleDefinitionInterface
     public function registerServices(DiInterface $dependencyInjector)
     {
         $this->di = $dependencyInjector;
-        $this->di->set('dispatcher',$this->setDispatcher());
+        $this->di->set('dispatcher', $this->setDispatcher());
+        $this->di->set('acl', $this->setAcl());
         $this->di->set('view', $this->setView(), true);
         $this->di->set('modelsMetadata', $this->setModelsMetadata());
     }
@@ -55,7 +52,17 @@ class Module implements ModuleDefinitionInterface
         $eventsManager = new EventsManager();
         $eventsManager->attach('dispatch:beforeExecuteRoute', new Authorization());
         $dispatcher->setEventsManager($eventsManager);
+
         return $dispatcher;
+    }
+
+    private function setAcl()
+    {
+        $aclName = '\\' . $this->prefix . '\Plugins\Authorization\Acl';
+        $acl = new $aclName();
+        $acl->check();
+
+        return $acl;
     }
 
     private function setView()
