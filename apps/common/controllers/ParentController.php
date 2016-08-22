@@ -2,7 +2,7 @@
 
 use \Phalcon\Mvc\Controller as PhalconController;
 
-class ParentController extends PhalconController
+abstract class ParentController extends PhalconController
 {
 
 }

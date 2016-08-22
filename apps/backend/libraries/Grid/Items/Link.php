@@ -1,5 +1,7 @@
 <?php namespace Backend\Libraries\Grid\Items;
 
+use \Phalcon\Tag;
+
 class Link extends Item implements ItemInterface
 {
     private $params = [];
@@ -33,7 +35,7 @@ class Link extends Item implements ItemInterface
 
     public function getValue()
     {
-        return \Phalcon\Tag::linkTo([
+        return Tag::linkTo([
             $this->linkParams,
             $this->linkText,
             'class' => 'btn btn-default',

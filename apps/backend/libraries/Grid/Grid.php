@@ -13,8 +13,8 @@ class Grid extends Component
     {
         $this->paginator =  new Pagination([
             'data'  => $data,
-            'limit' => 1,
-            'page'  => 3,
+            'limit' => 10,
+            'page'  => 1,
         ]);
         $this->page = $this->paginator->getPaginate();
         $this->items = $items;

@@ -2,7 +2,6 @@
 
 use \Common\Controllers\ParentController as CommonParentController;
 
-class ParentController extends CommonParentController
+abstract class ParentController extends CommonParentController
 {
-
 }

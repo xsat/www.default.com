@@ -10,10 +10,10 @@ class Authorization extends Plugin
     {
         //$acl = $this->getAcl();
 
-        var_dump(
+        /*var_dump(
             $dispatcher->getActionName(),
             $dispatcher->getControllerName(),
             $dispatcher->getModuleName()
-        );exit;
+        );exit;*/
     }
 }

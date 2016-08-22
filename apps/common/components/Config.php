@@ -11,7 +11,7 @@ class Config extends PhalconConfig
 			'host'     => 'localhost',
 			'username' => 'root',
 			'password' => '',
-			'name'     => 'test',
+			'name'     => 'default',
 		]];
 
 		parent::__construct($config);
