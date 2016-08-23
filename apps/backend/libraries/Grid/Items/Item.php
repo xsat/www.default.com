@@ -24,13 +24,17 @@ class Item implements ItemInterface
 
     public function getValue()
     {
-        $method = 'get' . \Phalcon\Text::camelize($this->field);
+        if ($this->model) {
+            $method = 'get' . \Phalcon\Text::camelize($this->field);
 
-        if (method_exists($this->model, $method)) {
-            return $this->model->{$method}();
+            if (method_exists($this->model, $method)) {
+                return $this->model->{$method}();
+            } else if (property_exists($this->model, $this->field)) {
+                return $this->model->{$this->field};
+            }
         }
 
-        return $this->model->{$this->field};
+        return $this->field;
     }
 
     public function getTitle()

@@ -39,10 +39,10 @@ abstract class Module implements ModuleDefinitionInterface
     public function registerServices(DiInterface $dependencyInjector)
     {
         $this->di = $dependencyInjector;
-        $this->di->set('dispatcher', $this->setDispatcher());
-        $this->di->set('acl', $this->setAcl());
+        $this->di->set('dispatcher', $this->setDispatcher(), true);
+        $this->di->set('acl', $this->setAcl(), true);
         $this->di->set('view', $this->setView(), true);
-        $this->di->set('modelsMetadata', $this->setModelsMetadata());
+        $this->di->set('modelsMetadata', $this->setModelsMetadata(), true);
     }
 
     private function setDispatcher()

@@ -14,7 +14,7 @@ class Grid extends Component
         $this->paginator =  new Pagination([
             'data'  => $data,
             'limit' => 10,
-            'page'  => 1,
+            'page'  => $this->request->get('page', 'int', 1),
         ]);
         $this->page = $this->paginator->getPaginate();
         $this->items = $items;
@@ -44,16 +44,24 @@ class Grid extends Component
     {
         $html = '';
 
-        foreach ($this->page->items as $model) {
-            $html .= '<tr>';
+        if (sizeof($this->page->items) > 0) {
+            foreach ($this->page->items as $model) {
+                $html .= '<tr>';
 
-            foreach ($this->items as $item) {
-                $item->setModel($model);
-                $html .= '<td>';
-                $html .= $item->getValue();
-                $html .= '</td>';
+                foreach ($this->items as $item) {
+                    $item->setModel($model);
+                    $html .= '<td>';
+                    $html .= $item->getValue();
+                    $html .= '</td>';
+                }
+
+                $html .= '</tr>';
             }
-
+        } else {
+            $html .= '<tr align="center">';
+            $html .= '<td colspan="' . sizeof($this->items) . '">';
+            $html .= 'No Items';
+            $html .= '</td>';
             $html .= '</tr>';
         }
 
@@ -62,19 +70,24 @@ class Grid extends Component
 
     public function renderPagination()
     {
-        $html = '<nav>';
-        $html .= '<ul class="pagination">';
+        $pages = $this->paginator->getPages();
+        $html = '';
 
-        foreach ($this->paginator->getPages() as $page) {
-            $html .= '<li'.$page->getClass().'>';
-            $html .= '<a'.$page->getLink().'>';
-            $html .= $page->getTitle();
-            $html .= '</a>';
-            $html .= '</li>';
+        if (sizeof($pages) > 1) {
+            $html .= '<nav>';
+            $html .= '<ul class="pagination pagination-sm">';
+
+            foreach ($this->paginator->getPages() as $page) {
+                $html .= '<li' . $page->getClass() . '>';
+                $html .= '<a' . $page->getLink() . '>';
+                $html .= $page->getTitle();
+                $html .= '</a>';
+                $html .= '</li>';
+            }
+
+            $html .= '</ul>';
+            $html .= '</nav>';
         }
-
-        $html .= '</ul>';
-        $html .= '</nav>';
 
         return $html;
     }

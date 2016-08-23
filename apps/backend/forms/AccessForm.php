@@ -19,6 +19,10 @@ class AccessForm extends Form
             ],
         ]))->setFilters([
             'int',
+        ])->addValidators([
+            new PresenceOf([
+                'message' => 'The resource is required',
+            ]),
         ])->setLabel('Resource'));
 
         $this->add((new Text('name', [

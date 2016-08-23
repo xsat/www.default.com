@@ -13,7 +13,7 @@ class Item implements ItemInterface
 
     public function getLink()
     {
-        return ' href="' . $this->number . '"';
+        return ' href="?page=' . $this->number . '"';
     }
 
     public function getClass()

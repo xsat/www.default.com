@@ -2,34 +2,50 @@
 
 use \Backend\Models\Resource as ResourceModel,
     \Backend\Libraries\Grid\Grid,
+    \Backend\Libraries\Grid\Buttons,
     \Backend\Libraries\Grid\Items\Item,
     \Backend\Libraries\Grid\Items\Link\GlyphiconLink,
     \Backend\Forms\ResourceForm;
-
 
 class ResourceController extends ParentController
 {
     public function indexAction()
     {
-        $grid = new Grid(
-            ResourceModel::find(), [
+        $grid = new Grid(ResourceModel::find(), [
             new Item('id', 'ID'),
             new Item('name'),
             new GlyphiconLink([
                 'for' => 'cap-admin',
                 'controller' => 'resource',
+                'action' => 'update',
+                'params' => '$id',
+            ], 'pencil', 'Update'),
+            new GlyphiconLink([
+                'for' => 'cap-admin',
+                'controller' => 'resource',
                 'action' => 'delete',
                 'params' => '$id',
-            ], 'trash'),
+            ], 'trash', 'Delete'),
         ]);
 
-        $this->view->setVar('grid', $grid);
+        $buttons = new Buttons([
+            new GlyphiconLink([
+                'for' => 'ca-admin',
+                'controller' => 'resource',
+                'action' => 'create',
+            ], 'plus'),
+        ]);
+
+        $this->view->setVars([
+            'grid' => $grid,
+            'buttons' => $buttons,
+        ]);
     }
 
     public function createAction()
     {
         $model = new ResourceModel();
-        $form = new ResourceForm($model);
+        $form = new ResourceForm($model, 'Create');
 
         if ($this->postModelForm($model, $form)) {
             if ($model->create()) {
@@ -54,7 +70,7 @@ class ResourceController extends ParentController
             return $this->indexRedirect();
         }
 
-        $form = new ResourceForm($model);
+        $form = new ResourceForm($model, 'Update');
 
         if ($this->postModelForm($model, $form)) {
             if ($model->update()) {

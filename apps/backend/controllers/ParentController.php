@@ -24,9 +24,8 @@ abstract class ParentController extends CommonParentController
     protected function indexRedirect()
     {
         return $this->response->redirect([
-            'for' => 'ca-admin',
+            'for' => 'c-admin',
             'controller' => $this->dispatcher->getControllerName(),
-            'action' => 'index',
         ]);
     }
 }

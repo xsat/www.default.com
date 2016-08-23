@@ -7,6 +7,6 @@ class Resource extends Model
 
     public function initialize()
     {
-        $this->hasMany('id', 'Common\Models\Access', 'resource_id', ['alias' => 'accesses']);
+        $this->hasMany('id', 'Backend\Models\Access', 'resource_id', ['alias' => 'accesses']);
     }
 }

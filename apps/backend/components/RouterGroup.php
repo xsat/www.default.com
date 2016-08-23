@@ -31,6 +31,7 @@ class RouterGroup extends Group
 
         $this->add('/:controller', [
             'controller' => 1,
+            'action' => 'index',
         ])->setName('c-admin');
     }
 }

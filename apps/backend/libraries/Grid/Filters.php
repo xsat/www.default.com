@@ -28,6 +28,5 @@ class Filters extends Component
 
     public function getFiltersByPage($page)
     {
-
     }
 }

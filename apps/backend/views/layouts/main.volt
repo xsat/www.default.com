@@ -30,10 +30,10 @@
                         <div class="col-md-12">
                             <ul id="navbar" class="nav nav-sidebar navbar-collapse collapse">
                                 <li class="active">
-                                    {{ link_to(['for': 'ca-admin', 'controller': 'resource', 'action': 'index'], 'Resources') }}
+                                    {{ link_to(['for': 'c-admin', 'controller': 'resource'], 'Resources') }}
                                 </li>
                                 <li>
-                                    {{ link_to(['for': 'ca-admin', 'controller': 'access', 'action': 'index'], 'Accesses') }}
+                                    {{ link_to(['for': 'c-admin', 'controller': 'access'], 'Accesses') }}
                                 </li>
                             </ul>
                         </div>

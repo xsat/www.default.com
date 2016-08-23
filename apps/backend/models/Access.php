@@ -8,6 +8,11 @@ class Access extends Model
 
     public function initialize()
     {
-        $this->belongsTo('resource_id', 'Common\Models\Access', 'id', ['alias' => 'resource']);
+        $this->belongsTo('resource_id', 'Backend\Models\Resource', 'id', ['alias' => 'resource']);
+    }
+
+    public function getResourceName()
+    {
+        return $this->resource->name;
     }
 }

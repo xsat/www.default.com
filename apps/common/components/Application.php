@@ -6,7 +6,8 @@ use \Phalcon\Mvc\Application as PhalconApplication,
     \Phalcon\Mvc\Url,
     \Phalcon\Db\Adapter\Pdo\Mysql,
     \Phalcon\Session\Adapter\Files as SessionFiles,
-    \Phalcon\Mvc\Model\Metadata\Files as MetadataFiles;
+    \Phalcon\Mvc\Model\Metadata\Files as MetadataFiles,
+    \Phalcon\Flash\Session as flashSession;
 
 class Application extends PhalconApplication
 {
@@ -33,23 +34,28 @@ class Application extends PhalconApplication
 
         $config = new Config();
         $di = new FactoryDefault();
-        $di->set('router', new Router());
-        $di->set('url', new Url());
-
+        $di->set('router', new Router(), true);
+        $di->set('url', new Url(), true);
         $di->set('db', new Mysql([
             "host" => $config->database->host,
             "username" => $config->database->username,
             "password" => $config->database->password,
             "dbname" => $config->database->name
-        ]));
+        ]), true);
         $di->set('session', function() {
             $session = new SessionFiles();
             $session->start();
             return $session;
-        });
+        }, true);
+        $di->set('flashSession', new FlashSession([
+            'error' => 'alert alert-danger',
+            'notice' => 'alert alert-warning',
+            'success' => 'alert alert-success',
+            'warning' => 'alert alert-warning',
+        ]), true);
         $di->set('modelsMetadata', new MetadataFiles([
             'metaDataDir' => $this->dir . '/../cache/models/'
-        ]));
+        ]), true);
 
         $this->setDI($di);
 

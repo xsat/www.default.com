@@ -7,8 +7,8 @@ use \Backend\Libraries\Grid\Pagination\Item,
 
 class Pagination extends PhalconPaginator
 {
-    private $page;
-    private $pages;
+    private $page = null;
+    private $pages = [];
 
     public function getPaginate()
     {
