@@ -21,6 +21,12 @@ class Link extends Item implements ItemInterface
         $this->updateParams();
     }
 
+    public function setParams($params = [])
+    {
+        $this->linkParams = $params;
+        $this->updateParams();
+    }
+
     private function updateParams()
     {
         $this->linkParams = $this->params;

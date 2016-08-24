@@ -1,6 +1,7 @@
 <?php namespace Backend\Libraries\Grid;
 
-use \Phalcon\Mvc\User\Component;
+use \Phalcon\Mvc\User\Component,
+    \Backend\Libraries\Grid\Items\ItemInterface;
 
 class Grid extends Component
 {
@@ -19,6 +20,11 @@ class Grid extends Component
         $this->page = $this->paginator->getPaginate();
         $this->items = $items;
         $this->filters = $filters;
+    }
+
+    public function addItem(ItemInterface $item)
+    {
+        $this->items[] = $item;
     }
 
     public function renderFilters()

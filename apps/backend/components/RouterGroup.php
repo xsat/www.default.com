@@ -21,8 +21,15 @@ class RouterGroup extends Group
         $this->add('/:controller/:action/:params', [
             'controller' => 1,
             'action' => 2,
-            'params' => 3
+            'params' => 3,
         ])->setName('cap-admin');
+
+        $this->add('/:controller/:action/:first/:second', [
+            'controller' => 1,
+            'action' => 2,
+            'first' => 3,
+            'second' => 4,
+        ])->setName('cap2-admin');
 
         $this->add('/:controller/:action', [
             'controller' => 1,

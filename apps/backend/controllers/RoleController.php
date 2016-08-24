@@ -1,35 +1,29 @@
 <?php namespace Backend\Controllers;
 
-use \Backend\Models\Access as AccessModel,
+use \Backend\Models\Role as RoleModel,
     \Backend\Libraries\Grid\Grid,
     \Backend\Libraries\Grid\Buttons,
     \Backend\Libraries\Grid\Items\Item,
     \Backend\Libraries\Grid\Items\Link,
     \Backend\Libraries\Grid\Items\Link\GlyphiconLink,
-    \Backend\Forms\AccessForm;
+    \Backend\Forms\RoleForm;
 
-class AccessController extends ParentController
+class RoleController extends ParentController
 {
     public function indexAction()
     {
-        $grid = new Grid(AccessModel::find(), [
+        $grid = new Grid(RoleModel::find(), [
             new Item('id', 'ID'),
             new Item('name'),
-            new Link([
-                'for' => 'cap-admin',
-                'controller' => 'resource',
-                'action' => 'update',
-                'params' => '$resource_id',
-            ], 'resource_name'),
             new GlyphiconLink([
                 'for' => 'cap-admin',
-                'controller' => 'access',
+                'controller' => 'role',
                 'action' => 'update',
                 'params' => '$id',
             ], 'pencil', 'Update'),
             new GlyphiconLink([
                 'for' => 'cap-admin',
-                'controller' => 'access',
+                'controller' => 'role',
                 'action' => 'delete',
                 'params' => '$id',
             ], 'trash', 'Delete'),
@@ -38,7 +32,7 @@ class AccessController extends ParentController
         $buttons = new Buttons([
             new GlyphiconLink([
                 'for' => 'ca-admin',
-                'controller' => 'access',
+                'controller' => 'role',
                 'action' => 'create',
             ], 'plus'),
         ]);
@@ -51,8 +45,8 @@ class AccessController extends ParentController
 
     public function createAction()
     {
-        $model = new AccessModel();
-        $form = new AccessForm($model, 'Create');
+        $model = new RoleModel();
+        $form = new RoleForm($model, 'Create');
 
         if ($this->postModelForm($model, $form)) {
             if ($model->create()) {
@@ -71,13 +65,13 @@ class AccessController extends ParentController
 
     public function updateAction($id = null)
     {
-        $model = AccessModel::findFirst($id);
+        $model = RoleModel::findFirst($id);
         if (!$model) {
             $this->flashSession->error('Model not found');
             return $this->indexRedirect();
         }
 
-        $form = new AccessForm($model, 'Update');
+        $form = new RoleForm($model, 'Update');
 
         if ($this->postModelForm($model, $form)) {
             if ($model->update()) {
@@ -96,7 +90,7 @@ class AccessController extends ParentController
 
     public function deleteAction($id = null)
     {
-        $model = AccessModel::findFirst($id);
+        $model = RoleModel::findFirst($id);
         if (!$model) {
             $this->flashSession->error('Model not found');
         } else {

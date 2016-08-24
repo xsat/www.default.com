@@ -29,7 +29,13 @@
                         </div>
                         <div class="col-md-12">
                             <ul id="navbar" class="nav nav-sidebar navbar-collapse collapse">
-                                <li class="active">
+                                <li>
+                                    {{ link_to(['for': 'c-admin', 'controller': 'role_access'], 'RoleAccesses') }}
+                                </li>
+                                <li>
+                                    {{ link_to(['for': 'c-admin', 'controller': 'role'], 'Roles') }}
+                                </li>
+                                <li>
                                     {{ link_to(['for': 'c-admin', 'controller': 'resource'], 'Resources') }}
                                 </li>
                                 <li>
