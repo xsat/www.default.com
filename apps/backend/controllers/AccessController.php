@@ -20,19 +20,29 @@ class AccessController extends ParentController
                 'controller' => 'resource',
                 'action' => 'update',
                 'params' => '$resource_id',
-            ], 'resource_name'),
+            ], [
+                'title' => 'Resource',
+                'field' => 'resource_name',
+                'class' => 'btn btn-sm btn-info',
+            ]),
             new GlyphiconLink([
                 'for' => 'cap-admin',
                 'controller' => 'access',
                 'action' => 'update',
                 'params' => '$id',
-            ], 'pencil', 'Update'),
+            ], 'pencil', [
+                'title' => 'Update',
+                'class' => 'btn btn-sm btn-warning',
+            ]),
             new GlyphiconLink([
                 'for' => 'cap-admin',
                 'controller' => 'access',
                 'action' => 'delete',
                 'params' => '$id',
-            ], 'trash', 'Delete'),
+            ], 'trash', [
+                'title' => 'Delete',
+                'class' => 'btn btn-sm btn-danger',
+            ]),
         ]);
 
         $buttons = new Buttons([
@@ -40,7 +50,9 @@ class AccessController extends ParentController
                 'for' => 'ca-admin',
                 'controller' => 'access',
                 'action' => 'create',
-            ], 'plus'),
+            ], 'plus', [
+                'class' => 'btn btn-sm btn-success',
+            ]),
         ]);
 
         $this->view->setVars([

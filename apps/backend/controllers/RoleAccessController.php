@@ -23,17 +23,23 @@ class RoleAccessController extends ParentController
                 'for' => 'cap2-admin',
                 'controller' => 'role_access',
                 'action' => 'change',
-                'first' => '$role_' . $role->id,
+                'first' => $role->id,
                 'second' => '$access_id',
-            ], $role->name, $role->name));
-        }
+            ], [
+                'title' => $role->name,
+                'text' => '$text_' . $role->id,
+                'class' => '$class_' . $role->id,
+            ]));
+    }
 
         $buttons = new Buttons([
             new GlyphiconLink([
                 'for' => 'ca-admin',
                 'controller' => 'role_access',
                 'action' => 'save',
-            ], 'save'),
+            ], 'save', [
+                'class' => 'btn btn-sm btn-success',
+            ]),
         ]);
 
         $this->view->setVars([
@@ -44,14 +50,12 @@ class RoleAccessController extends ParentController
 
     public function changeAction($role_id = null, $access_id = null)
     {
-        if (RoleAssesModel::change($role_id, $access_id)) {
-            $this->flashSession->success('Allow');
-        } else {
-            $this->flashSession->error('Deny');
-        }
+        $changeStatus = RoleAssesModel::change($role_id, $access_id);
 
-
-        return $this->indexRedirect();
+        return $this->response->setJsonContent([
+            'html' => $changeStatus ? 'Allow' : 'Deny',
+            'class'=> $changeStatus ? 'btn btn-sm btn-success ajax' : 'btn btn-sm btn-danger ajax',
+        ]);
     }
 
     public function saveAction()

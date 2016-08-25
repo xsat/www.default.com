@@ -34,7 +34,9 @@ class RoleController extends ParentController
                 'for' => 'ca-admin',
                 'controller' => 'role',
                 'action' => 'create',
-            ], 'plus'),
+            ], 'plus', [
+                'class' => 'btn btn-sm btn-success',
+            ]),
         ]);
 
         $this->view->setVars([

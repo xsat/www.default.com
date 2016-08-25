@@ -33,7 +33,9 @@ class ResourceController extends ParentController
                 'for' => 'ca-admin',
                 'controller' => 'resource',
                 'action' => 'create',
-            ], 'plus'),
+            ], 'plus', [
+                'class' => 'btn btn-sm btn-success',
+            ]),
         ]);
 
         $this->view->setVars([

@@ -4,51 +4,48 @@ use \Phalcon\Tag;
 
 class Link extends Item implements ItemInterface
 {
+    private $link = [];
     private $params = [];
-    private $linkParams = [];
 
-    public function __construct($params = [], $field = null, $title = null)
+    public function __construct($link, $params = [])
     {
-        parent::__construct($field, $title);
-        $this->params = $params;
-        $this->updateParams();
-    }
+        $field = isset($params['field']) ? $params['field'] : null;
+        $title = isset($params['title']) ? $params['title'] : null;
 
-    public function setModel($model)
-    {
-        parent::setModel($model);
+        if (is_string($params)) {
+            $field = $params;
+            $title = $params;
 
-        $this->updateParams();
-    }
-
-    public function setParams($params = [])
-    {
-        $this->linkParams = $params;
-        $this->updateParams();
-    }
-
-    private function updateParams()
-    {
-        $this->linkParams = $this->params;
-
-        $tempFiled = $this->field;
-
-        foreach ($this->params as $key => $param) {
-            if (preg_match('#^\$(.*)#isu', $param, $matches)) {
-                $this->field = $matches[1];
-                $this->linkParams[$key] = parent::getValue();
-            }
+            $params = [];
         }
 
-        $this->field = $tempFiled;
+        parent::__construct($field, $title);
+
+        $this->link = $link;
+        $this->params = $params;
     }
 
     public function getValue()
     {
-        return Tag::linkTo([
-            $this->linkParams,
-            parent::getValue(),
+        return Tag::linkTo(array_merge([
+            'action' => $this->update($this->link),
+            'text' => parent::getValue(),
             'class' => 'btn btn-sm btn-default',
-        ]);
+        ], $this->update($this->params)));
+    }
+
+    private function update($values)
+    {
+        $tempFiled = $this->field;
+
+        foreach ($values as $key => $param) {
+            if (preg_match('#^\$(.*)#isu', $param, $matches)) {
+                $this->field = $matches[1];
+                $values[$key] = parent::getValue();
+            }
+        }
+        $this->field = $tempFiled;
+
+        return $values;
     }
 }

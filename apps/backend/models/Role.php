@@ -17,15 +17,13 @@ class Role extends Model
 
         foreach ($accesses as $key => $access) {
             $data[$key] = [
-                'resource' => $access->resource->name,
-                'access' => $access->name,
                 'access_id' => $access->id,
             ];
 
             foreach ($roles as $role) {
                 $isAllow = RoleAccess::isAllow($role->id, $access->id);
-                $data[$key][$role->name] = RoleAccess::getStatusText($isAllow);
-                $data[$key]['role_' . $role->id] = $role->id;
+                $data[$key]['text_' . $role->id] = RoleAccess::getStatusText($isAllow);
+                $data[$key]['class_' . $role->id] = RoleAccess::getStatusClass($isAllow);
             }
         }
 

@@ -24,7 +24,7 @@ class Item implements ItemInterface
 
     public function getValue()
     {
-        if ($this->model) {
+        if ($this->model && $this->field !== null) {
             if (is_array($this->model)) {
                 if (isset($this->model[$this->field])) {
                     return $this->model[$this->field];

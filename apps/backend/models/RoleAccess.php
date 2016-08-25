@@ -59,11 +59,12 @@ class RoleAccess extends Model
 
     public static function getStatusText($status)
     {
-        if ($status) {
-            return 'Allow';
-        }
+        return $status ? 'Allow' : 'Deny';
+    }
 
-        return 'Deny';
+    public static function getStatusClass($status)
+    {
+        return $status ? 'btn btn-sm btn-success ajax' : 'btn btn-sm btn-danger ajax';
     }
 
 

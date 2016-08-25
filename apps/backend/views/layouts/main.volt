@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Back Layout</title>
         <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/admin.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,7 +51,8 @@
                 </div>
             </div>
         </div>
-        <script src="/js/jquery-1.12.4.min.js"></script>
+        <script src="/js/jquery-3.1.0.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/admin.js"></script>
     </body>
 </html>
