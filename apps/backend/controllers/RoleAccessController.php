@@ -1,6 +1,7 @@
 <?php namespace Backend\Controllers;
 
 use \Backend\Models\Role as RoleModel,
+    \Backend\Models\Access as AccessModel,
     \Backend\Models\RoleAccess as RoleAssesModel,
     \Backend\Libraries\Grid\Buttons,
     \Backend\Libraries\Grid\Grid,
@@ -13,7 +14,7 @@ class RoleAccessController extends ParentController
     public function indexAction()
     {
         $roles = RoleModel::find();
-        $grid = new Grid(RoleModel::grid($roles), [
+        $grid = new Grid(AccessModel::grid($roles), [
             new Item('resource', 'Resource'),
             new Item('access', 'Access'),
         ]);
