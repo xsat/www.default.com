@@ -12,6 +12,10 @@ class RoleController extends ParentController
 {
     public function indexAction()
     {
+        $model = new RoleModel();
+        $form = new RoleForm($model, 'Search');
+        $form->bind($this->request->get(), $model);
+
         $grid = new Grid(RoleModel::find(), [
             new Item('id', 'ID'),
             new Item('name'),
@@ -40,6 +44,7 @@ class RoleController extends ParentController
         ]);
 
         $this->view->setVars([
+            'form' => $form,
             'grid' => $grid,
             'buttons' => $buttons,
         ]);

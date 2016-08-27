@@ -54,8 +54,8 @@ class RoleAccessController extends ParentController
         $changeStatus = RoleAssesModel::change($role_id, $access_id);
 
         return $this->response->setJsonContent([
-            'html' => $changeStatus ? 'Allow' : 'Deny',
-            'class'=> $changeStatus ? 'btn btn-sm btn-success ajax' : 'btn btn-sm btn-danger ajax',
+            'html' => RoleAssesModel::getStatusText($changeStatus),
+            'class'=> RoleAssesModel::getStatusClass($changeStatus),
         ]);
     }
 

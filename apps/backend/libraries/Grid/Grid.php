@@ -6,9 +6,8 @@ use \Phalcon\Mvc\User\Component,
 class Grid extends Component
 {
     private $paginator;
-    private $page;
+    private $models;
     private $items = [];
-    private $filters = [];
 
     public function __construct($data, $items = [], $filters = [])
     {
@@ -17,7 +16,7 @@ class Grid extends Component
             'limit' => 10,
             'page'  => $this->request->get('page', 'int', 1),
         ]);
-        $this->page = $this->paginator->getPaginate();
+        $this->models = $this->paginator->getPaginate();
         $this->items = $items;
         $this->filters = $filters;
     }
@@ -27,8 +26,29 @@ class Grid extends Component
         $this->items[] = $item;
     }
 
-    public function renderFilters()
+    public function getItems()
     {
+        return $this->items;
+    }
+
+    public function getSize()
+    {
+        return sizeof($this->items);
+    }
+
+    public function isItems()
+    {
+        return $this->items && sizeof($this->items) > 0;
+    }
+
+    public function isModels()
+    {
+        return $this->models->items && sizeof($this->models->items) > 0;
+    }
+
+    public function getModels()
+    {
+        return $this->models->items;
     }
 
     public function renderHeader()
@@ -50,8 +70,8 @@ class Grid extends Component
     {
         $html = '';
 
-        if (sizeof($this->page->items) > 0) {
-            foreach ($this->page->items as $model) {
+        if (sizeof($this->models->items) > 0) {
+            foreach ($this->models->items as $model) {
                 $html .= '<tr>';
 
                 foreach ($this->items as $item) {

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(this).on('click.ajax', '.ajax', function(){
+    $(this).on('click.ajax', '.ajax', function(event) {
         var item = $(this);
         item.attr('disabled', true);
         $.ajax({
@@ -16,6 +16,8 @@ $(document).ready(function() {
         }).always(function() {
             item.attr('disabled', false);
         });
+
+        event.preventDefault();
 
         return false;
     });

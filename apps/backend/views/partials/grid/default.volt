@@ -7,14 +7,19 @@
     {% if flashSession.has() %}
         <div id="messages">{{ flashSession.output() }}</div>
     {% endif %}
+    {% if form is defined %}
+        <div class="panel-body">
+            {{ partial('partials/form/filter') }}
+        </div>
+    {% endif %}
     {% if grid is defined %}
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-condensed">
                 <thead>
-                    {{ grid.renderHeader() }}
+                    {{ partial('partials/grid/header/default') }}
                 </thead>
                 <tbody>
-                    {{ grid.renderBody() }}
+                    {{ partial('partials/grid/body/default') }}
                 </tbody>
             </table>
         </div>

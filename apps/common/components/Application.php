@@ -75,7 +75,7 @@ class Application extends PhalconApplication
     public function getCompressedContent()
     {
         $search = ['/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s', '/>(\s)+</', '/\n/', '/\r/', '/\t/'];
-        $replace = ['>', '<', '\\1', '><', '', '', ''];
+        $replace = ['>', '<', '\\1', '> <', '', '', ''];
 
         return preg_replace($search, $replace, $this->handle()->getContent());
     }

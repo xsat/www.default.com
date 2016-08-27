@@ -66,6 +66,4 @@ class RoleAccess extends Model
     {
         return $status ? 'btn btn-sm btn-success ajax' : 'btn btn-sm btn-danger ajax';
     }
-
-
 }
