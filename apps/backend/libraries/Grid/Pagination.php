@@ -40,19 +40,13 @@ class Pagination  implements AdapterInterface
 
     private function createPages()
     {
-        $prev = new Prev($this->page);
-        if ($prev->isPrev()) {
-            $this->pages[] = $prev;
-        }
+        $this->pages[] = new Prev($this->page);
 
         for ($number = $this->page->first; $number <= $this->page->total_pages; $number++) {
             $this->pages[] = new Item($number, $this->page);
         }
 
-        $next = new Next($this->page);
-        if ($next->isNext()) {
-            $this->pages[] = $next;
-        }
+        $this->pages[] = new Next($this->page);
     }
 
     public function getPages()

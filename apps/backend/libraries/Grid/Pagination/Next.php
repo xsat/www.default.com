@@ -1,5 +1,7 @@
 <?php namespace Backend\Libraries\Grid\Pagination;
 
+use \Phalcon\Tag;
+
 class Next extends Item implements ItemInterface
 {
     public function __construct($page)
@@ -7,13 +9,31 @@ class Next extends Item implements ItemInterface
         parent::__construct($page->next, $page);
     }
 
-    public function isNext()
-    {
-        return $this->number != $this->page->last;
-    }
-
     public function getTitle()
     {
-        return '<span class="glyphicon glyphicon-chevron-right"></span>';
+        return Tag::tagHtml('span', ['class' => 'glyphicon glyphicon-chevron-right'], true);
+    }
+
+    public function getClass()
+    {
+        if ($this->isNext()) {
+            return 'disabled';
+        }
+
+        return '';
+    }
+
+    public function getLink()
+    {
+        if ($this->isNext()) {
+            return 'javascript:void(0);';
+        }
+
+        return parent::getLink();
+    }
+
+    public function isNext()
+    {
+        return $this->page->current == $this->number;
     }
 }

@@ -19,6 +19,8 @@ class Grid extends Component
         $this->models = $this->paginator->getPaginate();
         $this->items = $items;
         $this->filters = $filters;
+
+        $this->paginator->getPages();
     }
 
     public function addItem(ItemInterface $item)
