@@ -4,7 +4,9 @@ interface ItemInterface
 {
     public function getLink();
 
+    public function getTitle();
+
     public function getClass();
 
-    public function getTitle();
+    public function isClass();
 }

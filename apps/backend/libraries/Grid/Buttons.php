@@ -4,21 +4,20 @@ use \Phalcon\Mvc\User\Component;
 
 class Buttons extends Component
 {
-    private $items = [];
+    private $buttons = [];
 
-    public function __construct($items = [])
+    public function __construct($buttons = [])
     {
-        $this->items = $items;
+        $this->buttons = $buttons;
     }
 
-    public function renderBody()
+    public function getButtons()
     {
-        $html = '';
+        return $this->buttons;
+    }
 
-        foreach ($this->items as $item) {
-            $html .= $item->getValue();
-        }
-
-        return $html;
+    public function isButtons()
+    {
+        return $this->buttons && sizeof($this->buttons) > 0;
     }
 }

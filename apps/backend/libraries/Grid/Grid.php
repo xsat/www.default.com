@@ -31,14 +31,14 @@ class Grid extends Component
         return $this->items;
     }
 
-    public function getSize()
-    {
-        return sizeof($this->items);
-    }
-
     public function isItems()
     {
         return $this->items && sizeof($this->items) > 0;
+    }
+
+    public function getSize()
+    {
+        return sizeof($this->items);
     }
 
     public function isModels()
@@ -51,70 +51,13 @@ class Grid extends Component
         return $this->models->items;
     }
 
-    public function renderHeader()
+    public function isPages()
     {
-        $html = '<tr class="info">';
-
-        foreach ($this->items as $item) {
-            $html .= '<th>';
-            $html .= $item->getTitle();
-            $html .= '</th>';
-        }
-
-        $html .= '</tr>';
-
-        return $html;
+        return sizeof($this->getPages()) > 1;
     }
 
-    public function renderBody()
+    public function getPages()
     {
-        $html = '';
-
-        if (sizeof($this->models->items) > 0) {
-            foreach ($this->models->items as $model) {
-                $html .= '<tr>';
-
-                foreach ($this->items as $item) {
-                    $item->setModel($model);
-                    $html .= '<td>';
-                    $html .= $item->getValue();
-                    $html .= '</td>';
-                }
-
-                $html .= '</tr>';
-            }
-        } else {
-            $html .= '<tr align="center">';
-            $html .= '<td colspan="' . sizeof($this->items) . '">';
-            $html .= 'No Items';
-            $html .= '</td>';
-            $html .= '</tr>';
-        }
-
-        return $html;
-    }
-
-    public function renderPagination()
-    {
-        $pages = $this->paginator->getPages();
-        $html = '';
-
-        if (sizeof($pages) > 1) {
-            $html .= '<nav>';
-            $html .= '<ul class="pagination pagination-sm">';
-
-            foreach ($this->paginator->getPages() as $page) {
-                $html .= '<li' . $page->getClass() . '>';
-                $html .= '<a' . $page->getLink() . '>';
-                $html .= $page->getTitle();
-                $html .= '</a>';
-                $html .= '</li>';
-            }
-
-            $html .= '</ul>';
-            $html .= '</nav>';
-        }
-
-        return $html;
+        return $this->paginator->getPages();
     }
 }

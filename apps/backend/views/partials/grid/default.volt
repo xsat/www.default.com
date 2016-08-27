@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     {% if buttons is defined %}
         <div class="panel-heading">
-            {{ buttons.renderBody() }}
+            {{ partial('partials/grid/buttons/default') }}
         </div>
     {% endif %}
     {% if flashSession.has() %}
@@ -24,7 +24,7 @@
             </table>
         </div>
         <div class="panel-footer">
-            {{ grid.renderPagination() }}
+            {{ partial('partials/grid/pagination/default') }}
         </div>
     {% endif %}
 </div>
