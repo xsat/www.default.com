@@ -1,6 +1,7 @@
 <?php namespace Backend\Controllers;
 
-use \Backend\Models\Role as RoleModel,
+use \Backend\Models\Role\Builder as RoleBuilder,
+    \Backend\Models\Role as RoleModel,
     \Backend\Libraries\Grid\Grid,
     \Backend\Libraries\Grid\Buttons,
     \Backend\Libraries\Grid\Items\Item,
@@ -12,11 +13,11 @@ class RoleController extends ParentController
 {
     public function indexAction()
     {
-        $model = new RoleModel();
+        $model = new RoleBuilder();
         $form = new RoleForm($model, 'Search');
         $form->bind($this->request->get(), $model);
 
-        $grid = new Grid(RoleModel::find(), [
+        $grid = new Grid($model->execute(), [
             new Item('id', 'ID'),
             new Item('name'),
             new GlyphiconLink([
