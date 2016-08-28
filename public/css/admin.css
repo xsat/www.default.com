@@ -1,3 +1,18 @@
+.panel-default > .breadcrumb {
+    border-bottom: 1px solid #ddd;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
 .ajax[disabled] {
     cursor: progress;
+}
+.breadcrumb {
+    margin-bottom: 0;
+}
+.pagination {
+    margin: 0 0 -5px 0;
+}
+#messages > .alert {
+    margin: 5px;
+    padding: 10px;
 }

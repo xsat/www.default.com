@@ -1,7 +1,7 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
-        1
-    </div>
+    {% if breadcrumbs is defined %}
+        {{ partial('partials/grid/breadcrumbs/default') }}
+    {% endif %}
     {% if flashSession.has() %}
         <div id="messages">{{ flashSession.output() }}</div>
     {% endif %}

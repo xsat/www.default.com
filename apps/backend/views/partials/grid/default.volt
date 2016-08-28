@@ -1,4 +1,7 @@
 <div class="panel panel-default">
+    {% if breadcrumbs is defined %}
+        {{ partial('partials/grid/breadcrumbs/default') }}
+    {% endif %}
     {% if buttons is defined %}
         <div class="panel-heading">
             {{ partial('partials/grid/buttons/default') }}

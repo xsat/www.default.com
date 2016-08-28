@@ -16,7 +16,7 @@ class Pagination  implements AdapterInterface
     private $pages = [];
 
     public function __construct($config = [])
-	{
+    {
         if (isset($config['data'])) {
             if (is_array($config['data'])) {
                 $this->paginator = new ArrayPaginator($config);
@@ -28,7 +28,7 @@ class Pagination  implements AdapterInterface
         } else {
             throw new Exception('Wrong config paginator');
         }
-	}
+    }
 
     public function getPaginate()
     {

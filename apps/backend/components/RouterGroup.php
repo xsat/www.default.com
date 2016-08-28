@@ -16,7 +16,7 @@ class RouterGroup extends Group
         $this->add('/', [
             'controller' => 'index',
             'action' => 'index'
-        ]);
+        ])->setName('home-admin');
 
         $this->add('/:controller/:action/:params', [
             'controller' => 1,

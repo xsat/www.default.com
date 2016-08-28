@@ -55,7 +55,7 @@ class Grid extends Component
 
     public function isPages()
     {
-        return sizeof($this->getPages()) > 1;
+        return sizeof($this->getPages()) > 3;
     }
 
     public function getPages()

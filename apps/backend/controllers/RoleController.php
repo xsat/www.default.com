@@ -4,8 +4,11 @@ use \Backend\Models\Role\Builder as RoleBuilder,
     \Backend\Models\Role as RoleModel,
     \Backend\Libraries\Grid\Grid,
     \Backend\Libraries\Grid\Buttons,
-    \Backend\Libraries\Grid\Items\Item,
-    \Backend\Libraries\Grid\Items\Link,
+    \Backend\Libraries\Grid\Breadcrumbs,
+    \Backend\Libraries\Grid\Items\Item as GridItem,
+    \Backend\Libraries\Grid\Items\Link as GridLink,
+    \Backend\Libraries\Grid\Breadcrumbs\Item as BreadcrumbItem,
+    \Backend\Libraries\Grid\Breadcrumbs\Link as BreadcrumbLink,
     \Backend\Libraries\Grid\Items\Link\GlyphiconLink,
     \Backend\Forms\RoleForm;
 
@@ -13,13 +16,13 @@ class RoleController extends ParentController
 {
     public function indexAction()
     {
-        $model = new RoleBuilder();
-        $form = new RoleForm($model, 'Search');
-        $form->bind($this->request->get(), $model);
+        $builder = new RoleBuilder();
+        $form = new RoleForm($builder, 'Search');
+        $form->bind($this->request->get(), $builder);
 
-        $grid = new Grid($model->execute(), [
-            new Item('id', 'ID'),
-            new Item('name'),
+        $grid = new Grid($builder->execute(), [
+            new GridItem('id', 'ID'),
+            new GridItem('name'),
             new GlyphiconLink([
                 'for' => 'cap-admin',
                 'controller' => 'role',
@@ -44,10 +47,16 @@ class RoleController extends ParentController
             ]),
         ]);
 
+        $breadcrumbs = new Breadcrumbs([
+            new BreadcrumbLink(['for' => 'home-admin'], 'Home'),
+            new BreadcrumbItem('Roles'),
+        ]);
+
         $this->view->setVars([
             'form' => $form,
             'grid' => $grid,
             'buttons' => $buttons,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -66,8 +75,18 @@ class RoleController extends ParentController
             return $this->indexRedirect();
         }
 
+        $breadcrumbs = new Breadcrumbs([
+            new BreadcrumbLink(['for' => 'home-admin'], 'Home'),
+            new BreadcrumbLink([
+                'for' => 'c-admin',
+                'controller' => 'role',
+            ], 'Roles'),
+            new BreadcrumbItem('Create'),
+        ]);
+
         $this->view->setVars([
             'form' => $form,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -91,8 +110,18 @@ class RoleController extends ParentController
             return $this->indexRedirect();
         }
 
+        $breadcrumbs = new Breadcrumbs([
+            new BreadcrumbLink(['for' => 'home-admin'], 'Home'),
+            new BreadcrumbLink([
+                'for' => 'c-admin',
+                'controller' => 'role',
+            ], 'Roles'),
+            new BreadcrumbItem('Update'),
+        ]);
+
         $this->view->setVars([
             'form' => $form,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
