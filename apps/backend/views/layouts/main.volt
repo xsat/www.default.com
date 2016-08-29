@@ -16,40 +16,26 @@
         <![endif]-->
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                    <span class="glyphicon glyphicon-align-justify"></span>
-                                </button>
-                                <a class="navbar-brand" href="#">Project name</a>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <ul id="navbar" class="nav nav-sidebar navbar-collapse collapse">
-                                <li>
-                                    {{ link_to(['for': 'c-admin', 'controller': 'role_access'], 'RoleAccesses') }}
-                                </li>
-                                <li>
-                                    {{ link_to(['for': 'c-admin', 'controller': 'role'], 'Roles') }}
-                                </li>
-                                <li>
-                                    {{ link_to(['for': 'c-admin', 'controller': 'resource'], 'Resources') }}
-                                </li>
-                                <li>
-                                    {{ link_to(['for': 'c-admin', 'controller': 'access'], 'Accesses') }}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ url(['for': 'home-admin']) }}">
+                        Home
+                    </a>
                 </div>
-                <div class="col-md-9">
-                    {{ content() }}
+                <div id="navbar" class="navbar-collapse collapse">
+                    {{ partial('partials/menu/default') }}
                 </div>
             </div>
+        </nav>
+        <div class="container main">
+            {{ content() }}
+            <footer class="footer">
+                © {{ date('Y') }} Default, Inc.
+            </footer>
         </div>
         <script src="/js/jquery-3.1.0.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>

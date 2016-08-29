@@ -1,3 +1,6 @@
+.container.main {
+    margin-top: 70px;
+}
 .panel-default > .breadcrumb {
     border-bottom: 1px solid #ddd;
     border-bottom-right-radius: 0;
