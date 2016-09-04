@@ -29,11 +29,13 @@ class Application extends PhalconApplication
             'Common\Controllers' => $this->dir  . '/../controllers/',
             'Common\Models' => $this->dir  . '/../models/',
             'Common\Plugins' => $this->dir  . '/../plugins/',
+            'Common\Libraries' => $this->dir  . '/../libraries/',
         ]);
         $loader->register();
 
         $config = new Config();
         $di = new FactoryDefault();
+        $di->set('config', $config, true);
         $di->set('router', new Router(), true);
         $di->set('url', new Url(), true);
         $di->set('db', new Mysql([

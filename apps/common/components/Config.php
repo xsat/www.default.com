@@ -12,7 +12,7 @@ class Config extends PhalconConfig
 			'username' => 'root',
 			'password' => '',
 			'name'     => 'default',
-		]];
+		], 'lang' => 'en'];
 
 		parent::__construct($config);
 	}
