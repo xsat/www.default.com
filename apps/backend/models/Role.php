@@ -2,7 +2,7 @@
 
 class Role extends Model
 {
-    public $in;
+    public $id;
     public $name;
 
     public function initialize()

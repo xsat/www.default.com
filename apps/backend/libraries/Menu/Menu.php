@@ -15,6 +15,9 @@ class Menu extends Component
     private function setItems()
     {
         $this->items = [
+            'Users' => [
+                new Item('Roles', ['for' => 'c-admin', 'controller' => 'role']),
+            ],
             'Accesses' => [
                 new Item('Role Accesses', ['for' => 'c-admin', 'controller' => 'role_access']),
                 new Item('Accesses', ['for' => 'c-admin', 'controller' => 'access']),
