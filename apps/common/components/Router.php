@@ -10,6 +10,10 @@ class Router extends PhalconRouter
 
         $this->setDefaultController('index');
         $this->setDefaultAction('index');
+        $this->notFound([
+            'controller' => 'index',
+            'action' => 'error',
+        ]);
 
         $this->mount(new \Frontend\RouterGroup());
         $this->mount(new \Backend\RouterGroup());

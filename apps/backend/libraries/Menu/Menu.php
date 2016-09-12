@@ -16,6 +16,7 @@ class Menu extends Component
     {
         $this->items = [
             'Users' => [
+                new Item('Admins', ['for' => 'c-admin', 'controller' => 'admin']),
                 new Item('Roles', ['for' => 'c-admin', 'controller' => 'role']),
             ],
             'Accesses' => [
