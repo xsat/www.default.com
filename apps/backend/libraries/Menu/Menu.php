@@ -23,6 +23,10 @@ class Menu extends Component
                 new Item('Accesses', ['for' => 'c-admin', 'controller' => 'access']),
                 new Item('Resources', ['for' => 'c-admin', 'controller' => 'resource']),
             ],
+            'Localization' => [
+                new Item('Translates', ['for' => 'c-admin', 'controller' => 'translate']),
+                new Item('Texts', ['for' => 'c-admin', 'controller' => 'text']),
+            ],
         ];
     }
 
